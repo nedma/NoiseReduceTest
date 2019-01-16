@@ -39,6 +39,8 @@
 			float3 checker(in float u, in float v)
 			{
 				float fmodResult = fmod(floor(_CheckerboardSize * u) + floor(_CheckerboardSize * v), 2.0);
+
+				// sign: Returns -1 if x is less than zero; 0 if x equals zero; and 1 if x is greater than zero.
 				float fin = max(sign(fmodResult), 0.0);
 				return fin;
 			}
