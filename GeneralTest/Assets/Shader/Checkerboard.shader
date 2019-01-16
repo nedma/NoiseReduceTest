@@ -3,6 +3,7 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+		_CheckerboardSize("CheckerboardSize", Range(0, 20)) = 2
 	}
 	SubShader
 	{
@@ -33,12 +34,11 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-
+			int _CheckerboardSize;
 
 			float3 checker(in float u, in float v)
 			{
-				float checkSize = 2;
-				float fmodResult = fmod(floor(checkSize * u) + floor(checkSize * v), 2.0);
+				float fmodResult = fmod(floor(_CheckerboardSize * u) + floor(_CheckerboardSize * v), 2.0);
 				float fin = max(sign(fmodResult), 0.0);
 				return fin;
 			}
@@ -61,7 +61,7 @@
 
 
 
-				col.rgb = checker(i.uv.x, i.uv.y);
+				col.rgb *= checker(i.uv.x, i.uv.y);
 
 				return col;
 			}
