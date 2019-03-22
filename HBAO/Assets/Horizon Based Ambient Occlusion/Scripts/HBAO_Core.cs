@@ -756,9 +756,12 @@ public class HBAO_Core : MonoBehaviour
         }
     }
 
+
     private void CreateRandomTexture(int size)
     {
-        noiseTex = new Texture2D(size, size, TextureFormat.RGB24, false, true);
+        // [nedma]DEINTERLEAVED --> _Jitter, otherwise --> _NoiseTex. To generate "rand"
+        // used for RotateDirections() and offset ray cast start position
+        noiseTex = new Texture2D(size, size, TextureFormat.RGB24, false, true);  // [nedma] _NoiseTex
         noiseTex.filterMode = FilterMode.Point;
         noiseTex.wrapMode = TextureWrapMode.Repeat;
         int z = 0;
@@ -780,7 +783,7 @@ public class HBAO_Core : MonoBehaviour
             float r1 = MersenneTwister.Numbers[j++];
             float r2 = MersenneTwister.Numbers[j++];
             float angle = 2.0f * Mathf.PI * r1 / _numSampleDirections[GetAoPass()];
-            _jitter[i] = new Vector4(Mathf.Cos(angle), Mathf.Sin(angle), r2, 0);
+            _jitter[i] = new Vector4(Mathf.Cos(angle), Mathf.Sin(angle), r2, 0); // [nedma] _Jitter
         }
     }
 

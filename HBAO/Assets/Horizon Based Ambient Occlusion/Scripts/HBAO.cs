@@ -35,6 +35,7 @@ public class HBAO : HBAO_Core
             RenderHBAO(source, destination);
     }
 
+    // [nedma]RenderHBAO
     private void RenderHBAO(RenderTexture source, RenderTexture destination)
     {
         RenderTexture rt = RenderTexture.GetTemporary(_renderTarget.fullWidth / _renderTarget.downsamplingFactor, _renderTarget.fullHeight / _renderTarget.downsamplingFactor);
